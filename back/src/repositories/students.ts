@@ -6,14 +6,17 @@ async function getAll(): Promise<IStudent[]> {
   try {
     const result = await postgres.query(
       `SELECT 
-        id, 
-        name, 
-        email, 
-        academic_record, 
-        social_security_number, 
-        created_at, 
-        updated_at 
-        FROM students`,
+         id, 
+         name, 
+         email, 
+         academic_record, 
+         social_security_number, 
+         created_at, 
+         updated_at 
+        FROM students
+        ORDER BY id DESC
+        LIMIT 100
+        `,
     );
     return result.rows;
   } catch (err) {
@@ -32,8 +35,8 @@ async function getByID(id: number): Promise<IStudent> {
           social_security_number, 
           created_at, 
           updated_at 
-          FROM students
-          WHERE id = $1`,
+       FROM students
+       WHERE id = $1`,
       [id],
     );
 
@@ -49,10 +52,10 @@ async function create(student: IStudent): Promise<void> {
   try {
     await postgres.query(
       `INSERT INTO students (
-        name, 
-        email, 
-        academic_record, 
-        social_security_number
+         name, 
+         email, 
+         academic_record, 
+         social_security_number
         ) 
        VALUES($1, $2, $3, $4)`,
       [student.name, student.email, student.academic_record, student.social_security_number],
@@ -71,19 +74,10 @@ async function update(student: IStudent): Promise<void> {
        SET
         name  = $1,
         email = $2,
-        academic_record = $3,
-        social_security_number = $4,
-        updated_at = $5
-       WHERE id = $6
+        updated_at = $3
+       WHERE id = $4
       `,
-      [
-        student.name,
-        student.email,
-        student.academic_record,
-        student.social_security_number,
-        updated_at,
-        student.id,
-      ],
+      [student.name, student.email, updated_at, student.id],
     );
   } catch (err) {
     throw err;

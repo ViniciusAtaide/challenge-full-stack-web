@@ -12,7 +12,7 @@ async function getAll(): Promise<IUser[]> {
         role,
         created_at, 
         updated_at 
-        FROM users`,
+       FROM users`,
     );
     return result.rows;
   } catch (err) {
@@ -30,8 +30,11 @@ async function getByID(id: number): Promise<IUser> {
           role,
           created_at, 
           updated_at 
-          FROM users
-          WHERE id = $1`,
+       FROM users
+       WHERE id = $1
+       ORDER BY id DESC
+       LIMIT 100
+          `,
       [id],
     );
 

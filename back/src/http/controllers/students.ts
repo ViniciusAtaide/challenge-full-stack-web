@@ -1,6 +1,6 @@
 import { IStudent } from 'domain/students';
 import { Request, Response } from 'express';
-import { studentSchema } from '../../validation/students';
+import { createStudentSchema, udpateStudentSchema } from '../../validation/students';
 import { StudentService } from '../../services/students';
 import ValidationError from '../../domain/errors/validation';
 import { EHTTP } from '../../enums/http-status-code';
@@ -29,7 +29,7 @@ export const create = async (req: Request, res: Response) => {
   try {
     const student = req.body as IStudent;
 
-    const validation = studentSchema.validate(student);
+    const validation = createStudentSchema.validate(student);
     if (validation.error?.message) {
       throw new ValidationError(validation.error?.message);
     }
@@ -50,7 +50,7 @@ export const update = async (req: Request, res: Response) => {
       id: +id,
     } as IStudent;
 
-    const validation = studentSchema.validate(student);
+    const validation = udpateStudentSchema.validate(student);
     if (validation.error?.message) {
       throw new ValidationError(validation.error?.message);
     }
