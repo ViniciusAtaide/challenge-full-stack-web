@@ -1,9 +1,5 @@
 import { IStudent, IStudentService } from '../domain/students';
-import {
-  StudentRepository,
-  checkSocialSecurityNumber,
-  checkAcademicRecord,
-} from '../repositories/students';
+import { StudentRepository } from '../repositories/students';
 import SocialSecurityError from '../domain/errors/social-security-number';
 
 async function getAll(): Promise<IStudent[]> {
@@ -24,10 +20,12 @@ async function getByID(id: number): Promise<IStudent> {
 
 async function create(student: IStudent): Promise<void> {
   try {
-    const ssnExists = await checkSocialSecurityNumber(student.social_security_number);
+    const ssnExists = await StudentRepository.checkSocialSecurityNumber(
+      String(student.social_security_number),
+    );
     if (ssnExists) throw new SocialSecurityError('This social security number already exists');
 
-    const arExists = await checkAcademicRecord(student.academic_record);
+    const arExists = await StudentRepository.checkAcademicRecord(String(student.academic_record));
     if (arExists) throw new SocialSecurityError('This academic record already exists');
 
     await StudentRepository.create(student);

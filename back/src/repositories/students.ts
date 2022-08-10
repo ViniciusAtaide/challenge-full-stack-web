@@ -92,7 +92,7 @@ async function remove(id: number): Promise<void> {
   }
 }
 
-export async function checkSocialSecurityNumber(ssn: string): Promise<boolean> {
+async function checkSocialSecurityNumber(ssn: string): Promise<boolean> {
   try {
     const result = await postgres.query('SELECT FROM students WHERE social_security_number = $1', [
       ssn,
@@ -104,7 +104,7 @@ export async function checkSocialSecurityNumber(ssn: string): Promise<boolean> {
   }
 }
 
-export async function checkAcademicRecord(ar: string): Promise<boolean> {
+async function checkAcademicRecord(ar: string): Promise<boolean> {
   try {
     const result = await postgres.query('SELECT FROM students WHERE academic_record = $1', [ar]);
     if (!result.rows[0]) return false;
@@ -120,4 +120,6 @@ export const StudentRepository: IStudentRepository = {
   create,
   update,
   remove,
+  checkSocialSecurityNumber,
+  checkAcademicRecord,
 };
