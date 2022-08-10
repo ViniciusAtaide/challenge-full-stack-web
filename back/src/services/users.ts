@@ -1,5 +1,5 @@
 import { IUser, IUserService } from '../domain/users';
-import { UserRepository, checkEmail } from '../repositories/users';
+import { UserRepository } from '../repositories/users';
 import EmailError from '../domain/errors/email';
 
 async function getAll(): Promise<IUser[]> {
@@ -20,7 +20,7 @@ async function getByID(id: number): Promise<IUser> {
 
 async function create(user: IUser): Promise<void> {
   try {
-    const emailExists = await checkEmail(user.email);
+    const emailExists = await UserRepository.checkEmail(String(user.email));
     if (emailExists) throw new EmailError('This email already exists');
 
     await UserRepository.create(user);

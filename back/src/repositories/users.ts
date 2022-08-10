@@ -90,7 +90,7 @@ async function remove(id: number): Promise<void> {
   }
 }
 
-export async function checkEmail(email: string): Promise<boolean> {
+async function checkEmail(email: string): Promise<boolean> {
   try {
     const result = await postgres.query('SELECT email FROM users WHERE email = $1', [email]);
     if (!result.rows[0]) return false;
@@ -106,4 +106,5 @@ export const UserRepository: IUserRepository = {
   create,
   update,
   remove,
+  checkEmail,
 };
