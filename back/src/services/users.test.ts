@@ -2,7 +2,7 @@ import { IUser } from '../domain/users';
 import { UserService } from './users';
 import { UserRepository } from '../repositories/users';
 
-describe('getAll success', () => {
+describe('user service - getAll success', () => {
   test('should return all users', async () => {
     const mockUsers: IUser[] = [
       {
@@ -35,7 +35,7 @@ describe('getAll success', () => {
   });
 });
 
-describe('getAll failure', () => {
+describe('user service - getAll failure', () => {
   test('should fail to return all users', async () => {
     UserRepository.getAll = jest.fn(() => {
       throw new Error('failed to retrieve the users');
@@ -49,7 +49,7 @@ describe('getAll failure', () => {
   });
 });
 
-describe('getByID success', () => {
+describe('user service - getByID success', () => {
   test('should return a user by id', async () => {
     const mockUser: IUser = {
       id: 1,
@@ -71,7 +71,7 @@ describe('getByID success', () => {
   });
 });
 
-describe('getByID failure', () => {
+describe('user service - getByID failure', () => {
   test('should fail to return a user by id', async () => {
     UserRepository.getByID = jest.fn(() => {
       throw new Error('failed to retrieve the user');
@@ -85,7 +85,7 @@ describe('getByID failure', () => {
   });
 });
 
-describe('create success', () => {
+describe('user service - create success', () => {
   test('should create a new user', async () => {
     const mockUser: IUser = {
       name: 'Pedro Rocha',
@@ -103,7 +103,7 @@ describe('create success', () => {
   });
 });
 
-describe('create failure', () => {
+describe('user service - create failure', () => {
   test('should fail to create a new user', async () => {
     const mockUser: IUser = {
       name: 'Pedro Rocha',
@@ -124,7 +124,7 @@ describe('create failure', () => {
   });
 });
 
-describe('update success', () => {
+describe('user service - update success', () => {
   test('should update a user', async () => {
     const mockUser: IUser = {
       name: 'Pedro Rocha',
@@ -140,7 +140,7 @@ describe('update success', () => {
   });
 });
 
-describe('update failure', () => {
+describe('user service - update failure', () => {
   test('should fail to update a user', async () => {
     const mockUser: IUser = {
       name: 'Pedro Rocha',
@@ -159,8 +159,8 @@ describe('update failure', () => {
   });
 });
 
-describe('delete success', () => {
-  test('should delete a user', async () => {
+describe('user service - remove success', () => {
+  test('should remove a user', async () => {
     const mockUser: IUser = {
       id: 1,
       name: 'Pedro Rocha',
@@ -180,7 +180,7 @@ describe('delete success', () => {
   });
 });
 
-describe('remove failure', () => {
+describe('user service - remove failure', () => {
   test('should fail to remove a user', async () => {
     UserRepository.remove = jest.fn(() => {
       throw new Error('failed to remove the user');

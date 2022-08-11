@@ -2,7 +2,7 @@ import { IStudent } from '../domain/students';
 import { StudentService } from './students';
 import { StudentRepository } from '../repositories/students';
 
-describe('getAll success', () => {
+describe('student service - getAll success', () => {
   test('should return all students', async () => {
     const mockStudents: IStudent[] = [
       {
@@ -35,7 +35,7 @@ describe('getAll success', () => {
   });
 });
 
-describe('getAll failure', () => {
+describe('student service - getAll failure', () => {
   test('should fail to return all students', async () => {
     StudentRepository.getAll = jest.fn(() => {
       throw new Error('failed to retrieve the students');
@@ -49,7 +49,7 @@ describe('getAll failure', () => {
   });
 });
 
-describe('getByID success', () => {
+describe('student service - getByID success', () => {
   test('should return a student by id', async () => {
     const mockStudent: IStudent = {
       id: 1,
@@ -71,7 +71,7 @@ describe('getByID success', () => {
   });
 });
 
-describe('getByID failure', () => {
+describe('student service - getByID failure', () => {
   test('should fail to return a student by id', async () => {
     StudentRepository.getByID = jest.fn(() => {
       throw new Error('failed to retrieve the student');
@@ -85,7 +85,7 @@ describe('getByID failure', () => {
   });
 });
 
-describe('create success', () => {
+describe('student service - create success', () => {
   test('should create a new student', async () => {
     const mockStudent: IStudent = {
       name: 'Pedro Rocha',
@@ -104,7 +104,7 @@ describe('create success', () => {
   });
 });
 
-describe('create failure', () => {
+describe('student service - create failure', () => {
   test('should fail to create a new student', async () => {
     const mockStudent: IStudent = {
       name: 'Pedro Rocha',
@@ -125,7 +125,7 @@ describe('create failure', () => {
   });
 });
 
-describe('update success', () => {
+describe('student service - update success', () => {
   test('should update a student', async () => {
     const mockStudent: IStudent = {
       name: 'Pedro Rocha',
@@ -141,7 +141,7 @@ describe('update success', () => {
   });
 });
 
-describe('update failure', () => {
+describe('student service - update failure', () => {
   test('should fail to update a student', async () => {
     const mockStudent: IStudent = {
       name: 'Pedro Rocha',
@@ -160,8 +160,8 @@ describe('update failure', () => {
   });
 });
 
-describe('delete success', () => {
-  test('should delete a student', async () => {
+describe('student service - remove success', () => {
+  test('should remove a student', async () => {
     const mockStudent: IStudent = {
       id: 1,
       name: 'Pedro Rocha',
@@ -181,7 +181,7 @@ describe('delete success', () => {
   });
 });
 
-describe('remove failure', () => {
+describe('student service - remove failure', () => {
   test('should fail to remove a student', async () => {
     StudentRepository.remove = jest.fn(() => {
       throw new Error('failed to remove the student');
